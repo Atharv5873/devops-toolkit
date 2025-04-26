@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 
 #Author:        Atharv Sharma
 #Date Created:  26/04/2025
