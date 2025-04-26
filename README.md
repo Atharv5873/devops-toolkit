@@ -6,7 +6,8 @@ Built to be modular, scalable, and **DevOps production-ready**.
 ---
 
 ## 📦 Project Structure
-![alt text](project-structure.png)
+<img src="project-structure.png" alt="Project Structure" width="350" height="450" />
+
 ---
 
 ## ✅ Completed So Far
