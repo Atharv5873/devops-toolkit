@@ -10,9 +10,9 @@
 #Usage:
 #Run this Script to install and start Apache2 on your system
 
-echo "Installing Apache2.."
+echo -e "Installing Apache2...\n"
 sudo apt update
 sudo apt install apache2 -y
 sudo systemctl enable apache2
 sudo systemctl start apache2
-echo "Apache2 installation and configuration complete"
+echo -e "\nApache2 installation and configuration complete"
