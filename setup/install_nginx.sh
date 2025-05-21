@@ -2,7 +2,7 @@
 
 #Author:        Atharv Sharma
 #Date Created:  26/04/2025
-#Date Modified: 26/04/2025
+#Date Modified: 21/05/2025
 
 #Description:
 #This script installs and configures NGINX on the server, ensung NGINX starts upon system boot
