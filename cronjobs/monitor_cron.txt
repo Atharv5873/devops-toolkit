@@ -1,0 +1,7 @@
+SHELL=/bin/bash
+PATH=/usr/bin:/bin
+
+*/5 * * * * /bin/bash /home/neonshroom/Documents/devops-toolkit/moniter/moniter_cpu.sh >> /home/neonshroom/Documents/devops-toolkit/logs/moniter_cpu.log 2>&1
+*/5 * * * * /bin/bash /home/neonshroom/Documents/devops-toolkit/moniter/moniter_disk.sh >> /home/neonshroom/Documents/devops-toolkit/logs/moniter_disk.log 2>&1
+*/5 * * * * /bin/bash /home/neonshroom/Documents/devops-toolkit/moniter/moniter_memory.sh >> /home/neonshroom/Documents/devops-toolkit/logs/moniter_memory.log 2>&1
+*/5 * * * * /bin/bash /home/neonshroom/Documents/devops-toolkit/moniter/moniter_service.sh >> /home/neonshroom/Documents/devops-toolkit/logs/moniter_service.log 2>&1
