@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 
 #Author:        Atharv Sharma
 #Date Created:  26/04/2025
@@ -13,6 +13,10 @@
 echo -e "Installing NGINX...\n"
 sudo apt update
 sudo apt install nginx -y
+if systemctl is-active --quiet apache2; then
+    echo "Apache2 is running. Stopping and disabling it to free port 80..."
+    sudo systemctl stop apache2
+fi
 sudo systemctl enable nginx
 sudo systemctl start nginx
 echo -e "\nNGINX installation and configuration complete"
