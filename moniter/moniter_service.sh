@@ -7,7 +7,7 @@
 # Description:
 # This script checks if a list of services are active and logs the status.
 
-LOG_DIR="/var/log/devops_toolkit"
+LOG_DIR="/home/neonshroom/Documents/devops-toolkit/logs"
 LOG_FILE="$LOG_DIR/service_status.log"
 SERVICES=("nginx" "mariadb" "docker" "ssh" "cron" "apache2")
 
@@ -19,6 +19,6 @@ for SERVICE in "${SERVICES[@]}"; do
     else
         status="inactive"
     fi
-    echo "$(date '+%Y-%m-%d %H:%M:%S') Service '$SERVICE' is $status" | sudo tee -a "$LOG_FILE" > /dev/null
+    echo "$(date '+%Y-%m-%d %H:%M:%S') Service '$SERVICE' is $status" |  tee -a "$LOG_FILE" > /dev/null
 done
 echo "Service status logged successfully"

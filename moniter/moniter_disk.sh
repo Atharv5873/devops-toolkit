@@ -11,12 +11,12 @@
 #Run this Script to monitor disk usage.
 
 
-LOG_DIR="/var/log/devops_toolkit"
+LOG_DIR="/home/neonshroom/Documents/devops-toolkit/logs"
 LOG_FILE="$LOG_DIR/disk_usage.log"
 
 sudo mkdir -p "$LOG_DIR"
 
 disk_usage=$(df / | grep / | awk '{print $5}')
 
-echo "$(date '+%y-%m-%d %H:%M:%S') Disk Usage: $disk_usage%" | sudo tee -a "$LOG_FILE" > /dev/null
+echo "$(date '+%y-%m-%d %H:%M:%S') Disk Usage: $disk_usage%" | tee -a "$LOG_FILE" > /dev/null
 echo "Disk usage logged successfully"
