@@ -11,7 +11,7 @@ LOG_DIR="/home/neonshroom/Documents/devops-toolkit/logs"
 LOG_FILE="$LOG_DIR/service_status.log"
 SERVICES=("nginx" "mariadb" "docker" "ssh" "cron" "apache2")
 
-sudo mkdir -p "$LOG_DIR"
+mkdir -p "$LOG_DIR"
 
 for SERVICE in "${SERVICES[@]}"; do
     if systemctl is-active --quiet "$SERVICE"; then

@@ -14,7 +14,7 @@
 LOG_DIR="/home/neonshroom/Documents/devops-toolkit/logs"
 LOG_FILE="$LOG_DIR/memory_usage.log"
 
-sudo mkdir -p "$LOG_DIR"
+mkdir -p "$LOG_DIR"
 
 memory_usage=$(free | grep Mem | awk '{print $3/$2 * 100.0}')
 

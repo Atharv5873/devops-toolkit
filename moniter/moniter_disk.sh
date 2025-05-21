@@ -14,7 +14,7 @@
 LOG_DIR="/home/neonshroom/Documents/devops-toolkit/logs"
 LOG_FILE="$LOG_DIR/disk_usage.log"
 
-sudo mkdir -p "$LOG_DIR"
+mkdir -p "$LOG_DIR"
 
 disk_usage=$(df / | grep / | awk '{print $5}')
 
