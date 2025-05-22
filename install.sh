@@ -37,12 +37,12 @@ echo "2) NGINX"
 read -rp "Enter 1 or 2: " web_choice
 
 if [ "$web_choice" == "1" ]; then
-    bash ./devops-toolkit/setup/install_apache.sh
+    bash ./setup/install_apache.sh
 elif [ "$web_choice" == "2" ]; then
-    bash ./devops-toolkit/setup/install_nginx.sh
+    bash ./setup/install_nginx.sh
 else
     echo "[!] Invalid Choice. Skipipng web server setup."
 fi
 
-bash ./devops-toolkit/setup/install_users
-bash ./devops-toolkit/setup/install_mariadb
+bash ./setup/install_users
+bash ./setup/install_mariadb
