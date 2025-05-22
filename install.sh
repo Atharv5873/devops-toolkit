@@ -31,18 +31,23 @@ if [ ! -d "moniter" ]||[ ! -d "setup" ];then
 fi
 
 echo ""
-echo "Which web server do you want to setup?"
-echo "1) Apache"
-echo "2) NGINX"
-read -rp "Enter 1 or 2: " web_choice
+#echo "Which web server do you want to setup?"
+#echo "1) Apache"
+#echo "2) NGINX"
+#read -rp "Enter 1 or 2: " web_choice
 
-if [ "$web_choice" == "1" ]; then
-    bash ./setup/install_apache.sh
-elif [ "$web_choice" == "2" ]; then
-    bash ./setup/install_nginx.sh
-else
-    echo "[!] Invalid Choice. Skipipng web server setup."
-fi
+#if [ "$web_choice" == "1" ]; then
+#    bash ./setup/install_apache.sh
+#elif [ "$web_choice" == "2" ]; then
+    bash setup/install_nginx.sh
+#else
+#    echo "[!] Invalid Choice. Skipipng web server setup."
+#fi
 
-bash ./setup/install_users
-bash ./setup/install_mariadb
+bash setup/install_users
+bash setup/install_mariadb
+# Skipping Apache setup, read prompt, and web server choice as not needed
+# echo "Which web server do you want to setup?"
+# read -rp "Enter 1 or 2: " web_choice
+# [!] Skipping read prompts because this script is meant to run non-interactively
+# [!] Apache installation intentionally skipped
