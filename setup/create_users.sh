@@ -2,15 +2,11 @@
 
 # Author:        Atharv Sharma
 # Date Created:  26/04/2025
-# Date Modified: 26/04/2025
+# Date Modified: 22/05/2025
 
 # Description:
-# This script creates a new user named 'devuser', sets up SSH key-based authentication for the user,
-# and ensures the necessary permissions and directory structure are properly configured.
-
-# Usage:
-# To use this script, simply run it. The script will create the user and configure SSH for that user.
-# (Important: Replace the SSH key in the script with your own public key for proper authentication.)
+# This script creates a new user, sets up SSH key-based authentication,
+# and ensures the necessary permissions and directory structure are configured.
 
 read -p "Enter a new user name: " USER
 
@@ -37,24 +33,31 @@ if [[ -z "$SSH_KEY" ]]; then
     exit 1
 fi
 
-# Set up SSH for the user
 echo "Setting up SSH for '$USER'..."
 
-# Create the .ssh directory and set correct ownership and permissions
-sudo mkdir -p /home/$USER/.ssh
-sudo chown $USER:$USER /home/$USER
-sudo chown $USER:$USER /home/$USER/.ssh
-sudo chmod 700 /home/$USER/.ssh
+SSH_DIR="/home/$USER/.ssh"
+AUTHORIZED_KEYS="$SSH_DIR/authorized_keys"
 
-# Add the SSH public key to authorized_keys
-echo "$SSH_KEY" | sudo tee /home/$USER/.ssh/authorized_keys > /dev/null
+# Create .ssh directory and set permissions
+sudo mkdir -p "$SSH_DIR"
+sudo chmod 700 "$SSH_DIR"
+sudo chown "$USER:$USER" "$SSH_DIR"
 
-# Set the appropriate permissions for the authorized_keys file
-sudo chmod 600 /home/$USER/.ssh/authorized_keys
-sudo chown $USER:$USER /home/$USER/.ssh/authorized_keys
+# Add SSH key to authorized_keys and set permissions
+printf '%s\n' "$SSH_KEY" | sudo tee "$AUTHORIZED_KEYS" > /dev/null
+if [ $? -ne 0 ]; then
+    echo "Failed to write SSH key to $AUTHORIZED_KEYS"
+    exit 1
+fi
+sudo chmod 600 "$AUTHORIZED_KEYS"
+sudo chown "$USER:$USER" "$AUTHORIZED_KEYS"
 
-# Check if everything was set up correctly
-if [ -f /home/$USER/.ssh/authorized_keys ]; then
+# Debug output: list file details as root
+echo "Debug: Listing authorized_keys file:"
+sudo ls -l "$AUTHORIZED_KEYS"
+
+# Verify setup with sudo test
+if sudo test -f "$AUTHORIZED_KEYS"; then
     echo "SSH key setup for '$USER' complete."
 else
     echo "Failed to set up SSH key. Exiting script."
