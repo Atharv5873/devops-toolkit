@@ -31,19 +31,18 @@ if [ ! -d "moniter" ]||[ ! -d "setup" ];then
 fi
 
 echo ""
-cd devops-toolkit/
 echo "Which web server do you want to setup?"
 echo "1) Apache"
 echo "2) NGINX"
 read -rp "Enter 1 or 2: " web_choice
 
 if [ "$web_choice" == "1" ]; then
-    bash setup/install_apache.sh
+    bash ./devops-toolkit/setup/install_apache.sh
 elif [ "$web_choice" == "2" ]; then
-    bash setup/install_nginx.sh
+    bash ./devops-toolkit/setup/install_nginx.sh
 else
     echo "[!] Invalid Choice. Skipipng web server setup."
 fi
 
-bash setup/install_users
-bash setup/install_mariadb
+bash ./devops-toolkit/setup/install_users
+bash ./devops-toolkit/setup/install_mariadb
