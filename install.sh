@@ -44,8 +44,8 @@ echo ""
 #    echo "[!] Invalid Choice. Skipipng web server setup."
 #fi
 
-bash setup/install_users
-bash setup/install_mariadb
+bash setup/create_users.sh
+bash setup/install_mariadb.sh
 # Skipping Apache setup, read prompt, and web server choice as not needed
 # echo "Which web server do you want to setup?"
 # read -rp "Enter 1 or 2: " web_choice
