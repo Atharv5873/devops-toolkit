@@ -23,9 +23,23 @@ echo -e "\nAutomated Installer Script"
 echo "=========================================================================================================================================================================="
 
 if [ ! -d "moniter" ]||[ ! -d "setup" ];then
-    echo "Cloning GitHub repo..."
+    echo "[*] Cloning GitHub repo..."
     git clone https://github.com/Atharv5873/devops-toolkit.git
     cd devops-toolkit ||{ echo "Failed to enter repo. Exiting.";
     exit 1;}
-    else echo "Running inside the repo folder."
+    else echo "[*] Running inside the repo folder."
+fi
+
+echo ""
+echo "Which web server do you want to setup?"
+echo "1) Apache"
+echo "2) NGINX"
+read -rp "Enter 1 or 2: " web_choice
+
+if [ "$web_choice" == "1" ]; then
+    bash setup/install_apache.sh
+elif [ "$web_choice" == "2" ]; then
+    bash setup/install_nginx.sh
+else
+    echo "[!] Invalid Choice. Skipipng web server setup."
 fi
