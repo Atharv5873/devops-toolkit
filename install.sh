@@ -43,3 +43,6 @@ elif [ "$web_choice" == "2" ]; then
 else
     echo "[!] Invalid Choice. Skipipng web server setup."
 fi
+
+bash setup/install_users
+bash setup/install_mariadb
