@@ -31,6 +31,7 @@ if [ ! -d "moniter" ]||[ ! -d "setup" ];then
 fi
 
 echo ""
+cd devops-toolkit
 echo "Which web server do you want to setup?"
 echo "1) Apache"
 echo "2) NGINX"
