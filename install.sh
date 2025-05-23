@@ -8,7 +8,9 @@
 #This script sets up server, users, monitoring, cron jobs, and create required folders
 
 #Usage:
-#curl -s https://raw.githubusercontent.com/Atharv5873/devops-toolkit/main/install.sh | bash
+# Interactive installer script for setting up server, users, monitoring, cron jobs, and required folders.
+# Assumes user has already cloned the repo and is running from inside the repo directory.
+
 
 echo "______                            _____           _ _    _ _   
 |  _  \                          |_   _|         | | |  (_) |  
@@ -21,33 +23,22 @@ echo "______                            _____           _ _    _ _
 
 echo -e "\nAutomated Installer Script"
 echo "=========================================================================================================================================================================="
-
-if [ ! -d "moniter" ]||[ ! -d "setup" ];then
-    echo "[*] Cloning GitHub repo..."
-    git clone https://github.com/Atharv5873/devops-toolkit.git
-    cd devops-toolkit ||{ echo "Failed to enter repo. Exiting.";
-    exit 1;}
-    else echo "[*] Running inside the repo folder."
+echo ""
+echo "Which web server do you want to setup?"
+echo "1) Apache"
+echo "2) NGINX"
+read -rp "Enter 1 or 2: " web_choice
+if [ "$web_choice" == "1" ]; then
+    bash ./setup/install_apache.sh
+elif [ "$web_choice" == "2" ]; then
+    bash setup/install_nginx.sh
+else
+    echo "[!] Invalid Choice. Skipipng web server setup."
 fi
 
-echo ""
-#echo "Which web server do you want to setup?"
-#echo "1) Apache"
-#echo "2) NGINX"
-#read -rp "Enter 1 or 2: " web_choice
+echo -e "\n[*] Setting up users..."
+bash setup/create_users.sh || { echo "Failed to setup users. Exiting."; exit 1; }
+echo -e "\n[*] Setting up MariaDB..."
+bash setup/install_mariadb.sh || { echo "Failed to setup MariaDB. Exiting."; exit 1; }
+echo -e "\n[*] Setup completed successfully!"
 
-#if [ "$web_choice" == "1" ]; then
-#    bash ./setup/install_apache.sh
-#elif [ "$web_choice" == "2" ]; then
-    bash setup/install_nginx.sh
-#else
-#    echo "[!] Invalid Choice. Skipipng web server setup."
-#fi
-
-bash setup/create_users.sh
-bash setup/install_mariadb.sh
-# Skipping Apache setup, read prompt, and web server choice as not needed
-# echo "Which web server do you want to setup?"
-# read -rp "Enter 1 or 2: " web_choice
-# [!] Skipping read prompts because this script is meant to run non-interactively
-# [!] Apache installation intentionally skipped
