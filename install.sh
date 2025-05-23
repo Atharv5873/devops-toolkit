@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
 #Author:        Atharv Sharma
 #Date Created:  21/05/2025
@@ -24,21 +26,26 @@ echo "______                            _____           _ _    _ _
 echo -e "\nAutomated Installer Script"
 echo "=========================================================================================================================================================================="
 echo ""
-echo "Which web server do you want to setup?"
-echo "1) Apache"
-echo "2) NGINX"
-read -rp "Enter 1 or 2: " web_choice
-if [ "$web_choice" == "1" ]; then
-    bash ./setup/install_apache.sh
-elif [ "$web_choice" == "2" ]; then
-    bash setup/install_nginx.sh
-else
-    echo "[!] Invalid Choice. Skipipng web server setup."
-fi
-
+while true; do
+    read -rp "Enter 1 for Apache or 2 for NGINX: " web_choice
+    if [[ "$web_choice" == "1" ]]; then
+        bash ./setup/install_apache.sh
+        break
+    elif [[ "$web_choice" == "2" ]]; then
+        bash ./setup/install_nginx.sh
+        break
+    else
+        echo "[!] Invalid choice. Please enter 1 or 2."
+    fi
+done
 echo -e "\n[*] Setting up users..."
 bash setup/create_users.sh || { echo "Failed to setup users. Exiting."; exit 1; }
 echo -e "\n[*] Setting up MariaDB..."
 bash setup/install_mariadb.sh || { echo "Failed to setup MariaDB. Exiting."; exit 1; }
 echo -e "\n[*] Setup completed successfully!"
+echo "=========================================================================================================================================================================="
+echo " "
+echo -e "\n[*] Setting up Cron jobs for monitoring..."
+crontab cronjobs/monitor_cron.txt || { echo "Failed to setup cron jobs. Exiting."; exit 1; }
 
+echo -e "\n[*] Setup completed successfully at $(date)."
